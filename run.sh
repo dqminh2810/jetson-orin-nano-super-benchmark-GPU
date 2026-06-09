@@ -21,6 +21,8 @@ mkdir build && cd build
 
 
 ## BUILD
+#### https://github.com/NVIDIA/cutlass/blob/main/python/cutlass_library/generator.py#L138 -- Change to Indentity2
+
 #### Jetson Orin Nano ARCH + Identity2 + INT8 & FP16 + Shape + Sparse GEMM
 cmake .. -DCUTLASS_NVCC_ARCHS=87 -DCUTLASS_LIBRARY_KERNELS="i16864spgemm;h16816spgemm"
 
@@ -52,13 +54,5 @@ make cutlass_profiler -j$(nproc)
 --stages=3 --warps_m=4 --warps_n=2 --warps_k=1 \
 >> test_result_float16.txt
 
-## reset swap memory to 4G after build
-du -sh /swapfile
-sudo mkswap /swapfile
-sudo swapoff /swapfile
-sudo rm /swapfile
-sudo fallocate -l 4G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-free -h
+## reset swap memory after build
+sudo reboot now

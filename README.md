@@ -17,3 +17,5 @@
 
 ## BENCHMARK
 `. ./run.sh`
+
+![performance](./img/perf_comparisons.png)

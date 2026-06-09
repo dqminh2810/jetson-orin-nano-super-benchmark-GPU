@@ -1,0 +1,36 @@
+=============================
+  Problem ID: 1
+
+        Provider: CUTLASS
+   OperationKind: spgemm
+       Operation: cutlass_tensorop_i16864spgemm_s8_256x128_128x3_tn_align16
+
+          Status: Success
+    Verification: ON
+     Disposition: Not verified
+
+reference_device: Not run
+          cuBLAS: Not run
+           cuDNN: Not run
+
+       Arguments: --gemm_kind=spgemm --m=512 --n=512 --k=8192 --A=s8:row --B=s8:column --C=s32:row --E=u32:nk2 --alpha=1  \
+                  --beta=0 --split_k_slices=1 --batch_count=1 --op_class=tensorop --accum=s32 --cta_m=256 --cta_n=128  \
+                  --cta_k=128 --cluster_m=1 --cluster_n=1 --cluster_k=1 --stages=3 --warps_m=4 --warps_n=2 --warps_k=1  \
+                  --inst_m=16 --inst_n=8 --inst_k=64 --min_cc=80 --max_cc=1024
+
+           Bytes: 7864320  bytes
+           FLOPs: 4295491584  flops
+           FLOPs/Byte: 546
+
+         Runtime: 0.133639  ms
+          Memory: 54.8061 GiB/s
+
+            Math: 32142.6 GFLOP/s
+
+
+=============================
+
+CSV Results:
+
+Problem,Provider,OperationKind,Operation,Disposition,Status,gemm_kind,m,n,k,A,B,C,E,alpha,beta,split_k_slices,batch_count,op_class,accum,cta_m,cta_n,cta_k,cluster_m,cluster_n,cluster_k,cluster_m_fallback,cluster_n_fallback,cluster_k_fallback,stages,warps_m,warps_n,warps_k,inst_m,inst_n,inst_k,min_cc,max_cc,Bytes,Flops,Flops/Byte,Runtime,GB/s,GFLOPs
+1,CUTLASS,spgemm,cutlass_tensorop_i16864spgemm_s8_256x128_128x3_tn_align16,not_verified,success,spgemm,512,512,8192,s8:row,s8:column,s32:row,u32:nk2,1,0,1,1,tensorop,s32,256,128,128,1,1,1,,,,3,4,2,1,16,8,64,80,1024,7864320,4295491584,546,0.133639,54.8061,32142.6

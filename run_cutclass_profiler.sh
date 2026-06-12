@@ -24,11 +24,19 @@ mkdir build && cd build
 ## BUILD
 #### https://github.com/NVIDIA/cutlass/blob/main/python/cutlass_library/generator.py#L138 -- Change to Indentity2
 
-#### Jetson Orin Nano ARCH + Identity2 + INT8 & FP16 + Shape + Sparse GEMM
-cmake .. -DCUTLASS_NVCC_ARCHS=87 -DCUTLASS_LIBRARY_KERNELS="i16864spgemm;h16816spgemm"
+#### Jetson Orin Nano ARCH + Identity1 + INT8 & FP16 + Shape + Sparse GEMM
+#cmake .. -DCUTLASS_NVCC_ARCHS=87 -DCUTLASS_LIBRARY_KERNELS="i16864spgemm;h16816spgemm"
 
-#### Jetson Orin Nano ARCH + Identity2 + All data types & Shapes + Sparse GEMM
+#### Jetson Orin Nano ARCH + Identity1 + All data types & Shapes + Sparse GEMM
 #cmake .. -DCUTLASS_NVCC_ARCHS=87 -DCUTLASS_LIBRARY_KERNELS="*spgemm*"
+
+#### Jetson Orin Nano ARCH + Identity1 + All data types & Shapes + GEMM
+cmake .. \
+-DCUTLASS_NVCC_ARCHS=87 \
+-DCUTLASS_LIBRARY_KERNELS="*gemm*" \
+-DCUTLASS_UNITY_BUILD_ENABLED=ON \
+-DCUTLASS_ENABLE_TESTS=OFF
+
 
 #### maximize CPU cores
 make cutlass_profiler -j$(nproc)
@@ -54,6 +62,16 @@ make cutlass_profiler -j$(nproc)
 --A=f16:row --B=f16:column --C=f32:row \
 --stages=3 --warps_m=4 --warps_n=2 --warps_k=1 \
 >> test_result_float16.txt
+
+#### Identity1 + Dense GEMM + FLOAT16
+#### m=512 n=512 k=8192
+./tools/profiler/cutlass_profiler \
+--operation=gemm \
+--op_class=tensorop \
+--m=512 --n=512 --k=8192 \
+--A=f16:row --B=f16:col --C=f16:col \
+--stages=3 --warps_m=4 --warps_n=2 --warps_k=1 \
+>> test_result_gemm_float16.txt
 
 ## reset swap memory after build
 sudo reboot now

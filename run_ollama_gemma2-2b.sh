@@ -1,10 +1,15 @@
 #!/bin/bash
 
-## ENABLE GPU FOR DOCKER
-#### Verify WSL2 Has GPU Access
-nvidia-smi
+##PREPARE ENV
+#### set to MAXN_SUPER power mode
+sudo nvpmodel -m 2
+#### lock the CPU & GPU max frequency
+sudo jetson_clocks
 
-#### Verify Container Runtime Integration
+#### ENABLE GPU FOR DOCKER
+###### Verify WSL2 Has GPU Access
+nvidia-smi
+###### Verify Container Runtime Integration
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 

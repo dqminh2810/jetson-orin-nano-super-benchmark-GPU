@@ -12,20 +12,20 @@
 - Jetpack 6.2.2
 
 ## BENCHMARK
-
 [Overview](https://developer.nvidia.com/blog/nvidia-jetpack-6-2-brings-super-mode-to-nvidia-jetson-orin-nano-and-jetson-orin-nx-modules/)
 
-#### cutclass_profiler
+### cutclass_profiler
 `. ./run_cutclass_profiler.sh`
 
 *RESULT*
 
-`Sparse GEMM + INT8` & `m=512 n=512 k=8192` give `32.142 TOPS` about `50% SOL`
+```
+- Sparse GEMM + INT8 & `m=512 n=512 k=8192` give `32.142 TOPS` about `50% SOL`
+- Sparse GEMM + FLOAT16 & `m=512 n=512 k=8192` give `19.283` TFLOPS
+- Dense GEMM + FLOAT16 & `m=512 n=512 k=8192` give `15.186` TFLOPS about `88% SOL`
+```
 
-`Sparse GEMM + FLOAT16` & `m=512 n=512 k=8192` give `19.283 TFLOPS` 
-
-
-#### ollama gemma2:2B
+### ollama gemma2:2B
 you can run ollama model on different PCs to compare the performance
 
 `. ./run_ollama_gemma2-2b.sh`

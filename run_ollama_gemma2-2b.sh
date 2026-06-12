@@ -23,11 +23,11 @@ sudo systemctl restart docker
 docker run -d --runtime nvidia -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 
 
-## INSTALL GEMMA3
-docker exec -it ollama ollama run --verbose gemma3
+## INSTALL GEMMA2:2B
+docker exec -it ollama ollama run --verbose gemma2:2b
 
 #### Natively run on MAC PRO
-#ollama run --verbose gemma3
+#ollama run --verbose gemma2:2b
 
 
 ## PROMPT

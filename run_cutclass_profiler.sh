@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ##PREPARE ENV
-#### set to MAXN mode
-sudo nvpmodel -m 2 
+#### set to MAXN_SUPER power mode
+sudo nvpmodel -m 2
+#### lock the CPU & GPU max frequency
 sudo jetson_clocks
 
 #### increase swap memory to 16G from SSD for build step
